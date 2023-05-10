@@ -35,9 +35,12 @@ def get_url(KEYWORD , browser):
     browser.get(url)
     browser.implicitly_wait(5)
 
+    log2 = "メルカリサイトにアクセス完了"
+
     #商品の詳細ページのURLを取得する
     # item_box = browser.find_elements_by_css_selector('#item-grid > ul > li')
     item_box = browser.find_elements(By.CSS_SELECTOR, '#item-grid > ul > li')
+    log3 = "商品詳細のページのURL取得完了"
     for item_elem in item_box:
         # item_url_ls.append(item_elem.find_element_by_css_selector('a').get_attribute('href'))
         # item_url_ls.append(item_elem.find_elements(By.CSS_SELECTOR, 'a').get_attribute('href'))
@@ -117,8 +120,20 @@ def main():
     KEYWORD = st.text_input("検索キーワード")
     st.write("<p></p>", unsafe_allow_html=True)
 
+    log1 = ""
+    log2 = ""
+    log3 = ""
+
+    if log1 != "":
+        print(f"log1 : {log1}")
+    if log2 != "":
+        print(f"log2 : {log2}")
+    if log3 != "":
+        print(f"log3 : {log3}")
+
     if KEYWORD != "":
         browser = browser_setup()
+        log1 = "ブラウザのセットアップ完了"
         get_url(KEYWORD , browser)
         get_data(browser)
         df = pd.DataFrame(item_ls)
