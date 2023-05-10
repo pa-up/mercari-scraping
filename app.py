@@ -104,10 +104,10 @@ def get_data(browser):
         }
         item_ls.append(data)
 
-        if count % 10 == 0:  # count : 0〜9 , 10〜19 , 20〜29
-            st.write(count + 1, "〜" , count + 10, "まで完了")
         item_url_ls_10 = len(item_url_ls) % 10
-        if item_url_ls_10 != 0  and  count == len(item_url_ls) - item_url_ls_10  :
+        if count % 10 == 0  and  count < len(item_url_ls) - item_url_ls_10 :  # count : 0〜9 , 10〜19 , 20〜29
+            st.write(count + 1, "〜" , count + 10, "まで完了")
+        if item_url_ls_10 != 0  and  count == len(item_url_ls) - item_url_ls_10 :
             st.write(count + 1, "〜" , len(item_url_ls) , "まで完了")
         count = count + 1
 
