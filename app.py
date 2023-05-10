@@ -42,7 +42,7 @@ def get_url(KEYWORD , browser):
     #商品の詳細ページのURLを取得する
     # item_box = browser.find_elements_by_css_selector('#item-grid > ul > li')
     item_box = browser.find_elements(By.CSS_SELECTOR, '#item-grid > ul > li')
-    log3 = "商品詳細のページのURL取得完了"
+    log3 = "商品詳細のページのURL取得開始"
     st.write("log3 : ", log3)
     for item_elem in item_box:
         # item_url_ls.append(item_elem.find_element_by_css_selector('a').get_attribute('href'))
@@ -50,6 +50,11 @@ def get_url(KEYWORD , browser):
         item_urls = item_elem.find_elements(By.CSS_SELECTOR, 'a')
         for item_url in item_urls:
             item_url_ls.append(item_url.get_attribute('href'))
+    
+    log4 = "商品詳細のページのURL取得完了"
+    st.write("log4 : ", log4)
+    st.write("<p></p>", unsafe_allow_html=True)
+
 
 def is_contained(target_str, search_str):
     """
@@ -112,6 +117,7 @@ def get_data(browser):
             'URL':item_url,
             '画像URL':src
         }
+        st.write("商品名 : ", item_name)
 
         item_ls.append(data)
 
