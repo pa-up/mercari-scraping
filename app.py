@@ -10,6 +10,10 @@ from selenium.webdriver.chrome import service as fs
 
 item_ls = []
 item_url_ls=[]
+log1 = "no"
+log2 = "no"
+log3 = "no"
+
 def browser_setup():
     """ブラウザを起動する関数"""
     #ブラウザの設定
@@ -120,16 +124,9 @@ def main():
     KEYWORD = st.text_input("検索キーワード")
     st.write("<p></p>", unsafe_allow_html=True)
 
-    log1 = ""
-    log2 = ""
-    log3 = ""
-
-    if log1 != "":
-        st.write("log1 : ", log1)
-    if log2 != "":
-        st.write("log2 : ", log2)
-    if log3 != "":
-        st.write("log3 : ", log3)
+    st.write("log1 : ", log1)
+    st.write("log2 : ", log2)
+    st.write("log3 : ", log3)
 
     if KEYWORD != "":
         browser = browser_setup()
