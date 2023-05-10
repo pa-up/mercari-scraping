@@ -125,11 +125,11 @@ def main():
     log3 = ""
 
     if log1 != "":
-        print(f"log1 : {log1}")
+        st.write("log1 : ", log1)
     if log2 != "":
-        print(f"log2 : {log2}")
+        st.write("log2 : ", log2)
     if log3 != "":
-        print(f"log3 : {log3}")
+        st.write("log3 : ", log3)
 
     if KEYWORD != "":
         browser = browser_setup()
