@@ -83,17 +83,8 @@ def page_mercari_shop_com(browser):
 
 def get_data(browser):
     #商品情報の詳細を取得する
-    st.write("全商品数", len(item_url_ls) , "個を取得中")
-
-    count = -1
-    if count >= 0:
-        if count % 10 == 0:  # count : 0〜9 , 10〜19 , 20〜29
-            st.write(count + 1, "〜" , count + 10, "まで完了")
-        item_url_ls_10 = len(item_url_ls) % 10
-        if item_url_ls_10 != 0  and  count + 1 == len(item_url_ls) - item_url_ls_10  :
-            st.write(count + 1, "〜" , len(item_url_ls) , "まで完了")
-
     count = 0
+    st.write("全商品数", len(item_url_ls) , "個を取得中")
     for item_url in item_url_ls:
         browser.get(item_url)
         time.sleep(3)
@@ -112,6 +103,12 @@ def get_data(browser):
             '画像URL':src
         }
         item_ls.append(data)
+
+        if count % 10 == 0:  # count : 0〜9 , 10〜19 , 20〜29
+            st.write(count + 1, "〜" , count + 10, "まで完了")
+        item_url_ls_10 = len(item_url_ls) % 10
+        if item_url_ls_10 != 0  and  count + 1 == len(item_url_ls) - item_url_ls_10  :
+            st.write(count + 1, "〜" , len(item_url_ls) , "まで完了")
         count = count + 1
 
 
