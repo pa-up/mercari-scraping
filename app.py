@@ -86,7 +86,6 @@ def get_data(browser):
     count = 0
     st.write("全商品数 : ", len(item_url_ls) , "個")
     for item_url in item_url_ls:
-        count = count + 1
         if count % 10 == 0:  # count : 0〜9 , 10〜19 , 20〜29
             st.write(count + 1, "〜" , count + 9, "まで完了")
         item_url_ls_10 = len(item_url_ls) % 10
@@ -110,6 +109,7 @@ def get_data(browser):
             '画像URL':src
         }
         item_ls.append(data)
+        count = count + 1
 
 
 def main():
