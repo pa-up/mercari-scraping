@@ -36,24 +36,12 @@ def get_url(KEYWORD , browser):
     browser.get(url)
     browser.implicitly_wait(5)
 
-    log2 = "メルカリサイトにアクセス完了"
-    st.write("log2 : ", log2)
-
     #商品の詳細ページのURLを取得する
-    # item_box = browser.find_elements_by_css_selector('#item-grid > ul > li')
     item_box = browser.find_elements(By.CSS_SELECTOR, '#item-grid > ul > li')
-    log3 = "商品詳細のページのURL取得開始"
-    st.write("log3 : ", log3)
     for item_elem in item_box:
-        # item_url_ls.append(item_elem.find_element_by_css_selector('a').get_attribute('href'))
-        # item_url_ls.append(item_elem.find_elements(By.CSS_SELECTOR, 'a').get_attribute('href'))
         item_urls = item_elem.find_elements(By.CSS_SELECTOR, 'a')
         for item_url in item_urls:
             item_url_ls.append(item_url.get_attribute('href'))
-    
-    log4 = "商品詳細のページのURL取得完了"
-    st.write("log4 : ", log4)
-    st.write("<p></p>", unsafe_allow_html=True)
 
 
 def is_contained(target_str, search_str):
@@ -96,10 +84,14 @@ def page_mercari_shop_com(browser):
 def get_data(browser):
     #商品情報の詳細を取得する
     count = 0
-    print(f"商品数 : {len(item_url_ls)}個 \n")
+    st.write("全商品数 : ", len(item_url_ls) , "個")
     for item_url in item_url_ls:
         count = count + 1
-        print(f"{count}個目")
+        if count % 10 == 0:  # count : 0〜9 , 10〜19 , 20〜29
+            st.write(count + 1, "〜" , count + 9, "まで完了")
+        item_url_ls_10 = len(item_url_ls) % 10
+        if item_url_ls_10 != 0  and  count == len(item_url_ls) - item_url_ls_10  :
+            st.write(count + 1, "〜" , len(item_url_ls) - item_url_ls_10 , "まで完了")
         
         browser.get(item_url)
         time.sleep(3)
@@ -117,8 +109,6 @@ def get_data(browser):
             'URL':item_url,
             '画像URL':src
         }
-        st.write("商品名 : ", item_name)
-
         item_ls.append(data)
 
 
@@ -131,8 +121,6 @@ def main():
 
     if KEYWORD != "":
         browser = browser_setup()
-        log1 = "ブラウザのセットアップ完了"
-        st.write("log1 : ", log1)
         get_url(KEYWORD , browser)
         get_data(browser)
         df = pd.DataFrame(item_ls)
